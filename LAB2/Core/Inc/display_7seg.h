@@ -11,4 +11,5 @@
 
 void setEnableSignal(int type);
 void display7SEG(int num);
+void update7SEG(int index);
 #endif /* INC_DISPLAY_7SEG_H_ */

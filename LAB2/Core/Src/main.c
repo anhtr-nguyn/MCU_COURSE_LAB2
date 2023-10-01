@@ -107,32 +107,28 @@ int main(void)
 		  setTimer1(50);
 		  break;
 	  case SEG0:
-		  setEnableSignal(status);
-		  display7SEG(1);
+		  update7SEG(status);
 		  if (timer1_flag == 1){
 			  status = SEG1;
 			  setTimer1(50);
 		  }
 		  break;
 	  case SEG1:
-		  setEnableSignal(status);
-		  display7SEG(2);
+		  update7SEG(status);
 		  if (timer1_flag == 1){
 			  status = SEG2;
 			  setTimer1(50);
 		  }
 		  break;
 	  case SEG2:
-		  setEnableSignal(status);
-		  display7SEG(3);
+		  update7SEG(status);
 		  if (timer1_flag == 1){
 			  status = SEG3;
 			  setTimer1(50);
 		  }
 		  break;
 	  case SEG3:
-		  setEnableSignal(status);
-		  display7SEG(0);
+		  update7SEG(status);
 		  if (timer1_flag == 1){
 			  status = SEG0;
 			  setTimer1(50);
