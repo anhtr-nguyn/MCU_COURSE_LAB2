@@ -93,9 +93,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   setTimer1(50);
-  setTimer2(200);
-  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+  setTimer2(100);
+  setTimer3(200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -104,33 +103,55 @@ int main(void)
   {
 	  switch(status){
 	  case INIT:
-		  status = SEG1;
+		  status = SEG0;
 		  setTimer1(50);
 		  break;
-	  case SEG1:
-		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
-		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+	  case SEG0:
+		  setEnableSignal(status);
 		  display7SEG(1);
+		  if (timer1_flag == 1){
+			  status = SEG1;
+			  setTimer1(50);
+		  }
+		  break;
+	  case SEG1:
+		  setEnableSignal(status);
+		  display7SEG(2);
 		  if (timer1_flag == 1){
 			  status = SEG2;
 			  setTimer1(50);
 		  }
 		  break;
 	  case SEG2:
-		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
-		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
-		  display7SEG(2);
+		  setEnableSignal(status);
+		  display7SEG(3);
 		  if (timer1_flag == 1){
-			  status = SEG1;
+			  status = SEG3;
+			  setTimer1(50);
+		  }
+		  break;
+	  case SEG3:
+		  setEnableSignal(status);
+		  display7SEG(0);
+		  if (timer1_flag == 1){
+			  status = SEG0;
 			  setTimer1(50);
 		  }
 		  break;
 	  default:
 		  break;
 	  }
+
+	  // TODO: LED PA5 Toggle independently
 	  if (timer2_flag == 1){
-		  setTimer2(200);
+		  setTimer2(100);
 		  HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+	  }
+
+	  //TODO: LED DOT Blink every 2 seconds
+	  if (timer3_flag == 1){
+		  setTimer3(200);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
     /* USER CODE END WHILE */
 
@@ -233,14 +254,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED1_Pin|EN1_Pin|EN2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin|LED1_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG1_A_Pin|SEG1_B_Pin|SEG1_C_Pin|SEG1_D_Pin
                           |SEG1_E_Pin|SEG1_F_Pin|SEG1_G_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED1_Pin EN_SEG1_Pin EN_SEG2_Pin */
-  GPIO_InitStruct.Pin = LED1_Pin|EN1_Pin|EN2_Pin;
+  /*Configure GPIO pins : DOT_Pin LED1_Pin EN0_Pin EN1_Pin
+                           EN2_Pin EN3_Pin */
+  GPIO_InitStruct.Pin = DOT_Pin|LED1_Pin|EN0_Pin|EN1_Pin
+                          |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -261,6 +285,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	timer1Run();
 	timer2Run();
+	timer3Run();
 }
 /* USER CODE END 4 */
 

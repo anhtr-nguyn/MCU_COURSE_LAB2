@@ -9,6 +9,6 @@
 #define INC_DISPLAY_7SEG_H_
 
 
-
+void setEnableSignal(int type);
 void display7SEG(int num);
 #endif /* INC_DISPLAY_7SEG_H_ */

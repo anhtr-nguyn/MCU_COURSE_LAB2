@@ -7,7 +7,39 @@
 
 #include "main.h"
 #include "display_7seg.h"
+#include "global.h"
 
+
+void setEnableSignal(int type){
+	switch (type){
+	case SEG0:
+		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, RESET);
+		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+		  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+		  break;
+	case SEG1:
+		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, RESET);
+		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+		  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+		  break;
+	case SEG2:
+		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, RESET);
+		  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, SET);
+		  break;
+	case SEG3:
+		  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, SET);
+		  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, SET);
+		  HAL_GPIO_WritePin(EN2_GPIO_Port, EN2_Pin, SET);
+		  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, RESET);
+		  break;
+	default:
+		break;
+	}
+}
 void display7SEG(int num){
 	 switch (num)
 	 {
