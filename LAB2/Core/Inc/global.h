@@ -14,7 +14,7 @@
 #define SEG2	2
 #define SEG3	3
 
-#define TIME_7SEG	25
+extern int TIME_7SEG;
 extern int status;
 
 extern const int MAX_LED;
