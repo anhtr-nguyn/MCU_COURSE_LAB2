@@ -122,7 +122,7 @@ int main(void)
 		  hour = 0;
 	  }
 	  updateClockBuffer();
-
+	  HAL_Delay(1000);
 //	  switch(status){
 //	  case INIT:
 //		  status = SEG0;
