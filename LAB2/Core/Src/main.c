@@ -108,7 +108,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //TODO: updateBufferClock for exercise 7: change the HAL_Delay() -> interupt
+	  // EX8
+	  // Similar to ex7: Move all code to while, reduce the complexity of interrupt
+	  //TODO: updateBufferClock for exercise 7: change the HAL_Delay() -> interrupt
 	  if (timer2_flag == 1){
 		  second++;
 		  setTimer2(1000);
