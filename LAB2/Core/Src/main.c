@@ -106,6 +106,10 @@ int main(void)
   setTimer3(2000);
   setTimer4(500);
   TIME_7SEG = 250;
+
+  //Variable used for shift the letter
+  int index_row_matrix = 0;
+  int start_col = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -182,11 +186,17 @@ int main(void)
 		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
 	  }
 	  if (timer4_flag == 1){
-		  setTimer4(500);
-		  if (index_led_matrix >= MAX_LED_MATRIX) index_led_matrix = 0;
-		  updateColM(index_led_matrix);
-		  updateLEDBuffer(index_led_matrix);
-		  index_led_matrix++;
+		  setTimer4(200);
+		  if (index_led_matrix >= MAX_LED_MATRIX){
+			  index_led_matrix = 0;
+			  start_col++;
+			  if (start_col >= MAX_LED_MATRIX) start_col = 0;
+			  index_row_matrix = start_col;
+		  }
+		  if (index_row_matrix >= MAX_LED_MATRIX) index_row_matrix = 0;
+
+		  updateColM(index_led_matrix++);
+		  updateLEDBuffer(index_row_matrix++);
 	  }
     /* USER CODE END WHILE */
 

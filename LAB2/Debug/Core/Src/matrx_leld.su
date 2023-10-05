@@ -1,2 +1,2 @@
-matrx_leld.c:19:6:updateColM	16	static
-matrx_leld.c:107:6:updateLEDBuffer	16	static
+matrx_leld.c:20:6:updateColM	16	static
+matrx_leld.c:109:6:updateLEDBuffer	16	static
