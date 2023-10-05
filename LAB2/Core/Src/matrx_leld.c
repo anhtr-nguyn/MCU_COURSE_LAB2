@@ -8,6 +8,7 @@
 #include "main.h"
 const int  MAX_LED_MATRIX = 8;
 int index_led_matrix = 0;
+// edit the column in order to present the letter A
 uint8_t matrix_buffer[8] = {0b00000000,
 							0b00111111,
 							0b01111111,
@@ -104,6 +105,7 @@ void updateColM(int index){
 	}
 }
 
+// Function to present the value of each row: each bit is present for the value
 void updateLEDBuffer(int index){
 	if (index >= 0 && index <= MAX_LED_MATRIX){
 		HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, (matrix_buffer[index] >> 7) & 0x01);
