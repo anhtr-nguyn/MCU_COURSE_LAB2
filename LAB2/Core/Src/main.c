@@ -106,8 +106,6 @@ int main(void)
   setTimer3(2000);
   setTimer4(500);
   TIME_7SEG = 250;
-  int index_col_matrix = index_led_matrix;
-  int start_col = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -186,14 +184,9 @@ int main(void)
 	  if (timer4_flag == 1){
 		  setTimer4(500);
 		  if (index_led_matrix >= MAX_LED_MATRIX) index_led_matrix = 0;
-		  if (index_col_matrix >= MAX_LED_MATRIX){
-			  index_col_matrix = 0;
-
-		  }
 		  updateColM(index_led_matrix);
-		  updateLEDBuffer(index_col_matrix);
+		  updateLEDBuffer(index_led_matrix);
 		  index_led_matrix++;
-		  index_col_matrix++;
 	  }
     /* USER CODE END WHILE */
 
