@@ -6,3 +6,4 @@ software_timer.c:43:6:timer1Run	4	static
 software_timer.c:52:6:timer2Run	4	static
 software_timer.c:61:6:timer3Run	4	static
 software_timer.c:70:6:timer4Run	4	static
+software_timer.c:79:6:timerRun	8	static

@@ -75,3 +75,10 @@ void timer4Run(){
 		}
 	}
 }
+
+void timerRun(){
+	timer1Run();
+	timer2Run();
+	timer3Run();
+	timer4Run();
+}
